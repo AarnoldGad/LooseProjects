@@ -23,6 +23,7 @@ obj/
 *.exe
 *.swp
 *.vim
+compile_commands.json
 
 # Build Generators
 

@@ -1,0 +1,7 @@
+#define  SCA_VERSION_MAJOR @SourceCodeAnalyzer_VERSION_MAJOR@
+#define  SCA_VERSION_MINOR @SourceCodeAnalyzer_VERSION_MINOR@
+
+#define  SCA_BUILD_DAY @SourceCodeAnalyzer_BUILD_DAY@
+#define  SCA_BUILD_MONTH @SourceCodeAnalyzer_BUILD_MONTH@
+#define  SCA_BUILD_YEAR @SourceCodeAnalyzer_BUILD_YEAR@
+

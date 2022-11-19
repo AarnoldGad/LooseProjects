@@ -4,6 +4,7 @@
 #include <set>
 #include <filesystem>
 
+#include "scaconfig.hpp"
 #include "scan/arguments.hpp"
 
 namespace fs = std::filesystem;
@@ -15,7 +16,7 @@ void print_help()
 
 void print_version()
 {
-    std::cout << "Version" << std::endl;
+    std::cout << "Version " << SCA_VERSION_MAJOR << "." << SCA_VERSION_MINOR << std::endl;
 }
 
 int main(int argc, char* argv[])

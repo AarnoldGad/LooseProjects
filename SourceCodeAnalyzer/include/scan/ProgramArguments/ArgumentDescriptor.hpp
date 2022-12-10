@@ -1,25 +1,30 @@
-#include <iostream>
-#include <filesystem>
+// ArgumentDescriptor.hpp
+// Gaétan "Aarnold Gad" Jalin
+// 24 Nov 2022
+#ifndef SCA_ARGUMENTDESCRIPTOR_HPP
+#define SCA_ARGUMENTDESCRIPTOR_HPP
 
-#include "scaconfig.hpp"
-#include "scan/ProgramArguments/ArgumentDictionary.hpp"
+#include <string>
 
-namespace fs = std::filesystem;
-
-int main(int argc, char* argv[])
+class ArgumentDescriptor
 {
-   ArgumentDictionary dictionary;
-   dictionary.addEntries({
-      {"help"   , 'h', "Prints help message"},
-      {"version", 'v', "Prints current version"}
-   });
+public:
+   std::string getName() const noexcept;
+   char getShortName() const noexcept;
+   std::string getDescription() const noexcept;
 
-   for (auto& descriptor : dictionary)
-      std::cout << descriptor.getName() << ", " << descriptor.getShortName() << ", " << descriptor.getDescription() << std::endl;
+   ArgumentDescriptor() = default;
+   ArgumentDescriptor(std::string const& name, char shortName, std::string const& description);
 
-   return 0;
-}
+private:
+   std::string m_name;
+   char m_shortName;
+   std::string m_description;
+};
 
+#include "ArgumentDescriptor.inl"
+
+#endif // SCA_ARGUMENTDESCRIPTOR_HPP
 //Don't Be a Jerk: The Open Source Software License.
 //Last Update: March 19, 2015
 //

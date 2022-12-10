@@ -14,8 +14,9 @@ SET(SourceCodeAnalyzer_VERSION_MINOR 0)
 STRING(TIMESTAMP SourceCodeAnalyzer_BUILD_DAY "%d")
 STRING(TIMESTAMP SourceCodeAnalyzer_BUILD_MONTH "%m")
 STRING(TIMESTAMP SourceCodeAnalyzer_BUILD_YEAR "%Y")
+STRING(TIMESTAMP SourceCodeAnalyzer_BUILD_DATE "%d %b %Y")
 
-MESSAGE(STATUS "Configuring ${PROJECT_NAME} v${PROJECT_VERSION} ...")
+MESSAGE(STATUS "Configuring ${PROJECT_NAME} version ${PROJECT_VERSION} on ${SourceCodeAnalyzer_BUILD_DATE}...")
 
 FIND_PACKAGE(Threads REQUIRED)
 
@@ -60,10 +61,21 @@ TARGET_INCLUDE_DIRECTORIES(scanalyzer SYSTEM PRIVATE
 
                            
 TARGET_SOURCES(scanalyzer PRIVATE
-               ${HPP_DIR}/arguments.hpp
+               ${HPP_DIR}/ProgramArguments/ArgumentDescriptor.hpp
+               ${HPP_DIR}/ProgramArguments/ArgumentDescriptor.inl
+               ${HPP_DIR}/ProgramArguments/ArgumentDictionary.hpp
+               ${HPP_DIR}/ProgramArguments/ArgumentDictionary.inl
+               ${HPP_DIR}/ProgramArguments/ArgumentParser.hpp
+               ${HPP_DIR}/ProgramArguments/ArgumentParser.inl
+               ${HPP_DIR}/ProgramArguments/ProgramArguments.hpp
+               ${HPP_DIR}/ProgramArguments/ProgramArguments.inl
+
+               ${CPP_DIR}/ProgramArguments/ArgumentDescriptor.cpp
+               ${CPP_DIR}/ProgramArguments/ArgumentDictionary.cpp
+               ${CPP_DIR}/ProgramArguments/ArgumentParser.cpp
+               ${CPP_DIR}/ProgramArguments/ProgramArguments.cpp
 
                ${CPP_DIR}/main.cpp
-               ${CPP_DIR}/arguments.cpp
                )
 
 TARGET_LINK_DIRECTORIES(scanalyzer PRIVATE

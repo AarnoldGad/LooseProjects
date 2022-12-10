@@ -1,24 +1,15 @@
-// arguments.hpp
+// ArgumentParser.hpp
 // Gaétan "Aarnold Gad" Jalin
-// 4 Nov 2022
+// 24 Nov 2022
+#ifndef SCA_ARGUMENTPARSER_HPP
+#define SCA_ARGUMENTPARSER_HPP
 
-#include <vector>
-#include <set>
-#include <string>
-#include <filesystem>
-#include <optional>
+#include "scan/ProgramArguments/ProgramArguments.hpp"
+#include "scan/ProgramArguments/ArgumentDictionary.hpp"
 
-typedef struct arguments_t
-{
-    std::vector<std::string> free;
+ProgramArguments ParseCommandLine(int argc, char* argv[], ArgumentDictionary const& dictionary);
 
-    bool help = false;
-    bool version = false;
-} arguments_t;
-
-arguments_t parse_args(int argc, char* argv[]);
-std::optional<std::set<std::filesystem::path> > extract_dirs(std::vector<std::string> const& paths);
-
+#endif // SCA_ARGUMENTPARSER_HPP
 //Don't Be a Jerk: The Open Source Software License.
 //Last Update: March 19, 2015
 //

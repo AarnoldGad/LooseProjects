@@ -1,25 +1,54 @@
-#include <iostream>
-#include <filesystem>
+// ArgumentDictionary.hpp
+// Gaétan "Aarnold Gad" Jalin
+// 24 Nov 2022
+#ifndef SCA_ARGUMENTDICTIONARY_HPP
+#define SCA_ARGUMENTDICTIONARY_HPP
 
-#include "scaconfig.hpp"
-#include "scan/ProgramArguments/ArgumentDictionary.hpp"
+#include <initializer_list>
+#include <string>
+#include <vector>
+#include <map>
 
-namespace fs = std::filesystem;
+#include "scan/ProgramArguments/ArgumentDescriptor.hpp"
 
-int main(int argc, char* argv[])
+class ArgumentDictionary
 {
-   ArgumentDictionary dictionary;
-   dictionary.addEntries({
-      {"help"   , 'h', "Prints help message"},
-      {"version", 'v', "Prints current version"}
-   });
+   using Iterator = std::vector<ArgumentDescriptor>::iterator;
+   using ConstIterator = std::vector<ArgumentDescriptor>::const_iterator;
+   using ReverseIterator = std::vector<ArgumentDescriptor>::reverse_iterator;
+   using ConstReverseIterator = std::vector<ArgumentDescriptor>::const_reverse_iterator;
+public:
+   ArgumentDictionary();
+   ArgumentDictionary(std::initializer_list<ArgumentDescriptor> descriptors);
 
-   for (auto& descriptor : dictionary)
-      std::cout << descriptor.getName() << ", " << descriptor.getShortName() << ", " << descriptor.getDescription() << std::endl;
+   void addEntry(ArgumentDescriptor const& descriptor);
+   void addEntry(std::string const& name, char shortName, std::string const& description);
+   void addEntries(std::initializer_list<ArgumentDescriptor> descriptors);
 
-   return 0;
-}
+   ArgumentDescriptor const* find(std::string const& name) const;
+   ArgumentDescriptor const* find(char shortName) const;
 
+   Iterator begin() noexcept;
+   ConstIterator begin() const noexcept;
+   ReverseIterator rbegin() noexcept;
+   ConstReverseIterator rbegin() const noexcept;
+
+   Iterator end() noexcept;
+   ConstIterator end() const noexcept;
+   ReverseIterator rend() noexcept;
+   ConstReverseIterator rend() const noexcept;
+
+private:
+   void add(ArgumentDescriptor const& descriptor);
+
+   std::vector<ArgumentDescriptor> m_descriptors;
+   std::map<std::string, ArgumentDescriptor const*> m_nameIndex;
+   std::map<char, ArgumentDescriptor const*> m_shortNameIndex;
+};
+
+#include "ArgumentDictionary.inl"
+
+#endif // SCA_ARGUMENTDICTIONARY_HPP
 //Don't Be a Jerk: The Open Source Software License.
 //Last Update: March 19, 2015
 //
